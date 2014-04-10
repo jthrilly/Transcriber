@@ -23,7 +23,7 @@
 				<div class="btn-group btn-group-lg navbar-right">
 					<button onclick="transcriber.Save();" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-cloud-download"></button>
 				</div>
-
+				<input id="speedSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.1" data-slider-max="2" data-slider-step="0.01" data-slider-value="1"/>
 				<div class="btn-group btn-group-lg">		
 		  			<button onclick="transcriber.Rewind()" class="btn btn-primary navbar-btn backward"><span class="glyphicon glyphicon-backward"></span></button>
 		  			<button onclick="transcriber.togglePlay()" class="btn btn-primary navbar-btn play"><span class="glyphicon glyphicon-play"></span></button>
@@ -31,7 +31,7 @@
 				</div>
 				<button onclick="javascript:void()" class="btn btn-link btn-lg navbar-btn time disabled">00:00</button>
 									<audio id="audio-player">
-						<source src="test.wav">
+						<source src="test2.mp3">
 					</audio>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -46,12 +46,20 @@
 
 	<footer class="bg-primary">
 		<div class="container">
-			<form role="form" class="form-inline">
-				<div class="radio">
-				</div>
-				<textarea class="form-control current-utterance"></textarea>
-			</form>
+			<div class="row">
+				<div class="col-md-2">
+
+					<button class="btn btn-primary btn-lg btn-block">Participant 1</button>
+					<button class="btn btn-primary btn-lg btn-block">Participant 1</button>
 			</div>
+ 				<div class="col-md-10">
+					<form role="form" class="form-inline">
+						<div class="radio"></div>
+						<textarea class="form-control current-utterance"></textarea>
+					</form>
+				</div>
+			</div>
+		</div>
 	</footer>  	
 
 <script src="js/main.min.js"></script>

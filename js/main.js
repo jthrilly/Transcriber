@@ -25,6 +25,12 @@ var Transcriber = function (options) {
 
 	this.init = function() {
 
+		$('#speedSlider').slider({}).on('slide', function(slideEvt) {
+			if (slideEvt.value[0] != 'undefined') {
+				app.adjustPlaySpeed(slideEvt.value[0]);
+				// console.log("valueslideEvt.value[0]);
+			}		
+		});
 		$(".time").html('00:00/'+formatTime(audioPlayer.duration));
 
 		$("#audio-player").bind('timeupdate', function(){
@@ -52,7 +58,7 @@ var Transcriber = function (options) {
     		// switch participant by pressing tab
     		if (e.which == 9) {
 				e.preventDefault();
-				$('input[type="radio"]').not(':checked').prop("checked", true);       			    			
+				app.toggleParticipant();       			    			
     		}
 
     		// Shift + space = toggle play/stop
@@ -134,6 +140,10 @@ var Transcriber = function (options) {
 
 	};
 
+	this.toggleParticipant = function() {
+		$('input[type="radio"]').not(':checked').prop("checked", true);
+	}
+
 	this.getInterviewData = function() {
 		return interviewData;
 	}
@@ -161,6 +171,17 @@ var Transcriber = function (options) {
 
 	this.loadAudio = function(arrayBuffer) {
 
+// <script type='text/javascript'> 
+//         function handleFiles(files){ 
+//                 var file = window.createObjectURL(files[0]); 
+//                 document.getElementById('audioPlayer').src = file; 
+//         } 
+// </script> 
+// <audio id='audioPlayer' controls ></audio> 
+// <input type='file' id='selectedFile' 
+// onchange='handleFiles(this.files)' /> 
+
+
 	};
 
 	this.togglePlay = function() {
@@ -169,6 +190,10 @@ var Transcriber = function (options) {
 		} else {
 			app.Play();
 		}
+	}
+
+	this.adjustPlaySpeed = function(speed) {
+		audioPlayer.playbackRate = speed;
 	}
 
 	this.Play = function() {
