@@ -18,25 +18,37 @@
 
 <body>
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-
-				<div class="btn-group btn-group-lg navbar-right">
-					<button onclick="transcriber.Save();" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-cloud-download"></button>
+			<div class="container">
+				<div class="btn-group btn-group-lg">	
+					<button onclick="javascript:void(0)" class="btn btn-default navbar-btn open-music"><span class="glyphicon glyphicon-music"></button>
 				</div>
-				<input id="speedSlider" data-slider-id='ex1Slider' type="text" data-slider-min="0.1" data-slider-max="2" data-slider-step="0.01" data-slider-value="1"/>
 				<div class="btn-group btn-group-lg">		
 		  			<button onclick="transcriber.Rewind()" class="btn btn-primary navbar-btn backward"><span class="glyphicon glyphicon-backward"></span></button>
 		  			<button onclick="transcriber.togglePlay()" class="btn btn-primary navbar-btn play"><span class="glyphicon glyphicon-play"></span></button>
 		  			<button onclick="transcriber.Forward()" class="btn btn-primary navbar-btn forward"><span class="glyphicon glyphicon-forward"></span></button>
 				</div>
-				<button onclick="javascript:void()" class="btn btn-link btn-lg navbar-btn time disabled">00:00</button>
-									<audio id="audio-player">
+				<div style="display:inline">
+				<button onclick="javascript:void(0)" class="btn btn-link btn-lg navbar-btn time disabled">00:00</button>
+					<input type='file' id='selectedFile' onchange='transcriber.loadAudio(this.files);' /> 
+					<audio id="audio-player">
 						<source src="test2.mp3">
 					</audio>
-		</div><!-- /.container-fluid -->
+				</div>
+
+				<div style="display:inline">
+					<input id="speedSlider"/>
+				</div>
+			</div>
+
+		<div class="btn-group btn-group-lg navbar-right"  style="display:inline;position:fixed;top:0;right:15px">
+			<button onclick="transcriber.resetInterview();" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-file"></button>
+			<button onclick="transcriber.Save();" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-cloud-download"></button>
+			<button onclick="transcriber.Save();" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-info-sign"></button>
+		</div>	
+
 	</nav>
 
-<div class="container">
+<div class="container main-content">
 	<ul class="list-group">
 		
 	</ul>
@@ -47,12 +59,9 @@
 	<footer class="bg-primary">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2">
-
-					<button class="btn btn-primary btn-lg btn-block">Participant 1</button>
-					<button class="btn btn-primary btn-lg btn-block">Participant 1</button>
-			</div>
- 				<div class="col-md-10">
+				<div class="col-md-3 participant-buttons">
+				</div>
+ 				<div class="col-md-9">
 					<form role="form" class="form-inline">
 						<div class="radio"></div>
 						<textarea class="form-control current-utterance"></textarea>

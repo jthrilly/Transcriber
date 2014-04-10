@@ -7,6 +7,10 @@ Import Bootstrap LESS and Site Specific LESS
 @import '../less/variables.less'; /* Your site specific LESS variables - these override BS defaults  */
 @import '../less/bootstrap-slider.less';
 
+html {
+    -webkit-font-smoothing: antialiased !important;
+}
+
 footer {
     position:fixed;
     bottom:0;
@@ -15,13 +19,45 @@ footer {
     padding:25px 0;
 }
 
+.slider.slider-horizontal {
+    // margin-top:19px;
+}
+
+.slider-selection {
+    background: #BABABA;
+}
+
+.slider-track {
+    background-image: linear-gradient(to bottom, #E2E2E2 0%, #DDDDDD 100%);
+}
+
+
 textarea {
     width:100% !important;
 }
 
+.navbar-default {
+    background:white;
+    box-shadow: 2px -6px 20px rgba(0, 0, 0, 0.85);
+}
+
+.navbar-left {
+    float:none !important;
+    text-align: center;
+}
+
+.individual {
+    border:0;
+}
+
+.active-individual {
+    background: #67A5D6;
+    opacity: 1;
+}
+
 .current-utterance {
     height:150px !important;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .utterance {
@@ -31,6 +67,7 @@ textarea {
 
 .radio {
     visibility:hidden;
+    display:none !important;
 }
 
 .time {
@@ -38,6 +75,7 @@ textarea {
 }
 
 .list-group-item {
-    background:#f8f8f8;
-    margin-bottom:10px;
+    background:#fff;
+    border:0;
+    padding:15px 20px;
 }

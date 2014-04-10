@@ -21,12 +21,25 @@ var Transcriber = function (options) {
 		seconds = (seconds >= 10) ? seconds : "0" + seconds;
 		return minutes + ":" + seconds;
 	}
+	
+	function isNumber(n) {
+ 		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
 
 
 	this.init = function() {
-
-		$('#speedSlider').slider({}).on('slide', function(slideEvt) {
-			if (slideEvt.value[0] != 'undefined') {
+		$('#selectedFile').hide();
+		$('.open-music').on('click',function(){
+			$('#selectedFile').trigger('click');
+		});
+		$('#speedSlider').slider({
+			min: 0.1,
+			max: 2,
+			step: 0.1,
+			value: 1,
+			tooltip: 'hide'
+		}).on('slide', function(slideEvt) {
+			if (isNumber(slideEvt.value[0])) {
 				app.adjustPlaySpeed(slideEvt.value[0]);
 				// console.log("valueslideEvt.value[0]);
 			}		
@@ -37,13 +50,21 @@ var Transcriber = function (options) {
 			var time = formatTime(audioPlayer.currentTime);
 			$('.time').html(time+'/'+formatTime(audioPlayer.duration));
 		});
+		$("#audio-player").bind('durationchange', function(){
+			var time = formatTime(audioPlayer.currentTime);
+			$('.time').html(time+'/'+formatTime(audioPlayer.duration));
+		});
+
 
 		$.each(appOptions.participants, function(value, index) {
+				$('.participant-buttons').append('<button class="btn btn-primary btn-block individual">'+index+'</button>');
 				$('.radio').append('<label><input type="radio" name="participantRadio" value="'+index+'">'+index+'</label>');				
 		});
 		$('input:radio:first').prop("checked", true); 
+		$('.individual:first').addClass('active-individual');
 
 		// Offset the body with the footer height so no elements are unintentionally hidden behind it
+
 		var footerHeight = $('footer').outerHeight();
 		var navHeight = $('nav').outerHeight()+15;
 		$('body').css({'marginBottom':footerHeight, 'marginTop':navHeight});
@@ -101,7 +122,7 @@ var Transcriber = function (options) {
 		        var element = $(this);
 		        $(element).parent().transition({background:'rgb(232, 255, 235)'}, 800, 'ease');
 				timeout = setTimeout(function(){
-    				$(element).parent().transition({ background:'#f8f8f8'}, 1800, 'ease');
+    				$(element).parent().transition({ background:'#ffffff'}, 1800, 'ease');
 					}, 1500);
 		    	}
 		});
@@ -133,7 +154,7 @@ var Transcriber = function (options) {
         	// clear the textarea
         	$('.current-utterance').val('');
         	//switch participant
-			$('input[type="radio"]').not(':checked').prop("checked", true);   
+			app.toggleParticipant();   
     	});
 
 		init = true;
@@ -142,10 +163,23 @@ var Transcriber = function (options) {
 
 	this.toggleParticipant = function() {
 		$('input[type="radio"]').not(':checked').prop("checked", true);
+		$('.individual').toggleClass('active-individual');
 	}
 
 	this.getInterviewData = function() {
 		return interviewData;
+	}
+
+	this.resetInterview = function() {
+		currentTime = 0;
+		interviewData = [];
+		startTime = 0;
+		app.Stop();
+		audioPlayer.src = null;
+		$('.time').html('00:00/00:00');
+		$(".list-group").empty();
+		$('.current-utterance').focus();
+
 	}
 
 	this.addUtterance = function(data) {
@@ -153,10 +187,10 @@ var Transcriber = function (options) {
 		var counter = interviewData.length-1;
 		var newItem = $('<a class="list-group-item" style="opacity:0;position:relative;top:200px" data-index="'+counter+'">').html('<h4 class="list-group-item-heading">'+data.participant+' <small>'+formatTime(data.startTime)+'-'+formatTime(data.submitTime)+'</small></h4><div contenteditable class="utterance">'+data.utterance+'</div></a>');
 		$('.list-group').append(newItem);
-		newItem.transition({ opacity: 1,top:0,background:'rgb(232, 255, 235)'}, 800, 'ease');
+		newItem.transition({ opacity: 1,top:0,background:'rgb(255, 249, 182)'}, 800, 'ease');
 		$('body, html').stop().animate({ scrollTop: newItem.offset().top },1500);
 		timeout = setTimeout(function(){
-    		newItem.transition({ background:'#f8f8f8'}, 1800, 'ease');
+    		newItem.transition({ background:'#fff'}, 1800, 'ease');
 		}, 1500);
 	};
 
@@ -169,17 +203,13 @@ var Transcriber = function (options) {
 
 	};
 
-	this.loadAudio = function(arrayBuffer) {
-
-// <script type='text/javascript'> 
-//         function handleFiles(files){ 
-//                 var file = window.createObjectURL(files[0]); 
-//                 document.getElementById('audioPlayer').src = file; 
-//         } 
-// </script> 
-// <audio id='audioPlayer' controls ></audio> 
-// <input type='file' id='selectedFile' 
-// onchange='handleFiles(this.files)' /> 
+	this.loadAudio = function(files) {
+		app.resetInterview();
+        var file = (window.webkitURL ? webkitURL : URL).createObjectURL(files[0]); 
+        audioPlayer.src = file;
+        audioPlayer.load();
+		var time = formatTime(audioPlayer.currentTime);
+		$('.current-utterance').focus();
 
 
 	};
