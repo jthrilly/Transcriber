@@ -1,0 +1,38 @@
+ 
+/* ===================================================================
+Import Bootstrap LESS and Site Specific LESS
+=================================================================== */
+ 
+@import '../bower_components/bootstrap/less/bootstrap.less'; /* Compiled in Codekit - referenced here as a Framework */
+@import '../less/variables.less'; /* Your site specific LESS variables - these override BS defaults  */
+
+footer {
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    padding:25px 0;
+}
+
+textarea {
+    width:100% !important;
+}
+
+.current-utterance {
+    height:150px !important;
+    font-size: 1.3em;
+}
+
+.utterance {
+    border:0;
+    background:transparent;
+}
+
+.time {
+    // font-size:3em;
+}
+
+.list-group-item {
+    background:#f8f8f8;
+    margin-bottom:10px;
+}
