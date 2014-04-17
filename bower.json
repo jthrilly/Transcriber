@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap": "~3.1.1",
     "jquery.transit": "~0.9.9",
-    "seiyria-bootstrap-slider": "https://github.com/seiyria/bootstrap-slider.git#~3.0.1"
+    "seiyria-bootstrap-slider": "https://github.com/seiyria/bootstrap-slider.git#~3.0.1",
+    "jquery-ui": "~1.10.4"
   }
 }
