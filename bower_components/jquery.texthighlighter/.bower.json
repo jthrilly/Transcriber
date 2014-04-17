@@ -1,0 +1,15 @@
+{
+  "name": "jquery.texthighlighter",
+  "homepage": "https://github.com/mir3z/jquery.texthighlighter",
+  "version": "0.2.1",
+  "_release": "0.2.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.1",
+    "commit": "19169bbb108774742398be690d794309540a6b0b"
+  },
+  "_source": "https://github.com/mir3z/jquery.texthighlighter.git",
+  "_target": "~0.2.1",
+  "_originalSource": "https://github.com/mir3z/jquery.texthighlighter.git",
+  "_direct": true
+}

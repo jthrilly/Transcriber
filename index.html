@@ -29,14 +29,14 @@
 				</div>
 				<div style="display:inline">
 				<button onclick="javascript:void(0)" class="btn btn-link btn-lg navbar-btn time disabled">00:00</button>
-					<input type='file' id='selectedFile' onchange='transcriber.loadAudio(this.files);' /> 
+					<input type='file' id='selectedFile' onchange='transcriber.loadAudio(this.files);'  style="display:none"/> 
 					<audio id="audio-player">
 						<source src="test2.mp3">
 					</audio>
 				</div>
 
-				<div style="display:inline">
-					<input id="speedSlider"/>
+				<div style="display:inline;">
+					<input id="speedSlider" style="display:none"/>
 				</div>
 			</div>
 

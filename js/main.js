@@ -285,10 +285,10 @@ var Transcriber = function (options) {
 		var counter = interviewData.length-1;
 		var newItem = $('<a class="list-group-item" style="opacity:0;position:relative;top:200px" data-index="'+counter+'">').html('<div class="drag-handle" style="background:#eee;height:45px;width:15px;float:left;margin-right:10px;cursor:move"></div><h4 class="list-group-item-heading participant-heading">'+data.participant+'</h4> <h5 contenteditable class="utterance-time">'+formatTime(data.startTime)+'-'+formatTime(data.submitTime)+'</h5><button type="button" class="btn btn-link btn-lg remove-utterance"><span class="glyphicon glyphicon-remove-circle"></span></button><div contenteditable class="utterance">'+data.utterance+'</div></a>');
 		$('.list-group').append(newItem);
-		newItem.transition({ opacity: 1,top:0,background:'rgb(255, 249, 182)'}, 800, 'ease');
+		newItem.stop().transition({ opacity: 1,top:0,background:'rgb(255, 249, 182)'}, 800, 'ease');
 		$('body, html').stop().animate({ scrollTop: newItem.offset().top },1500);
 		timeout = setTimeout(function(){
-    		newItem.transition({ background:'#fff'}, 1800, 'ease');
+    		newItem.stop().transition({ background:'#fff'}, 1800, 'ease');
 		}, 1500);
 		app.saveData();
 	};
@@ -298,9 +298,9 @@ var Transcriber = function (options) {
 		interviewData[index].utterance = $(element).children('.utterance').html();
 		interviewData[index].participant = $(element).children('.participant-heading').html();
 		app.saveData();
-        $(element).transition({background:'rgb(232, 255, 235)'}, 800, 'ease');
+        $(element).stop().transition({background:'rgb(232, 255, 235)'}, 800, 'ease');
 		timeout = setTimeout(function(){
-			$(element).transition({ background:'#ffffff'}, 1800, 'ease');
+			$(element).stop().transition({ background:'#ffffff'}, 1800, 'ease');
 			}, 1500);
 	};
 
@@ -308,7 +308,7 @@ var Transcriber = function (options) {
 		var element = $('*[data-index="'+index+'"]');
 		interviewData.remove(index);
 		timeout = setTimeout(function(){
-			$(element).transition({background:'Tomato',opacity: 0 }, function () { $(this).remove(); });
+			$(element).stop().transition({background:'Tomato',opacity: 0 }, function () { $(this).remove(); });
 			}, 500);
 		app.saveData();
 
