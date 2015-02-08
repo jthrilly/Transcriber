@@ -1,0 +1,33 @@
+{
+  "name": "Transcriber",
+  "version": "1.0.0",
+  "description": "An interview transcription tool, written in HTML5.",
+  "private": true,
+  "homepage": "https://github.com/jthrilly/Transcriber",
+  "bugs": "https://github.com/jthrilly/Transcriber/issues",
+  "author": {
+    "name": "Joshua Melville",
+    "email": "",
+    "url": "https://github.com/jthrilly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jthrilly/Transcriber.git"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "main": "index.html",
+  "scripts": {
+    "start": "nodewebkit"
+  },
+  "window": {
+    "toolbar": false,
+    "frame": true,
+    "position": "center",
+    "width": 1020,
+    "height": 820,
+    "min_width": 1020,
+    "min_height": 820
+  }
+}
